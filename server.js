@@ -1,6 +1,6 @@
-import "dotenv/config";
-import express from "express";
-import uuidv4 from "uuid/v4";
+import 'dotenv/config';
+import express from 'express';
+import uuidv4 from 'uuid/v4';
 const app = express();
 
 app.use(express.json());
@@ -8,45 +8,45 @@ app.use(express.urlencoded({ extended: true }));
 
 let users = {
   1: {
-    id: "1",
-    username: "Robin Wieruch"
+    id: '1',
+    username: 'Robin Wieruch'
   },
   2: {
-    id: "2",
-    username: "Dave Davids"
+    id: '2',
+    username: 'Dave Davids'
   }
 };
 let messages = {
   1: {
-    id: "1",
-    text: "Hello World",
-    userId: "1"
+    id: '1',
+    text: 'Hello World',
+    userId: '1'
   },
   2: {
-    id: "2",
-    text: "By World",
-    userId: "2"
+    id: '2',
+    text: 'By World',
+    userId: '2'
   }
 };
 
-app.get("/users", (req, res) => {
+app.get('/users', (req, res) => {
   return res.send(Object.values(users));
 });
-app.get("/users/:userId", (req, res) => {
+app.get('/users/:userId', (req, res) => {
   return res.send(users[req.params.userId]);
 });
 
-app.get("/messages", (req, res) => {
+app.get('/messages', (req, res) => {
   return res.send(Object.values(messages));
 });
-app.get("/messages/:messageId", (req, res) => {
+app.get('/messages/:messageId', (req, res) => {
   return res.send(messages[req.params.messageId]);
 });
-app.get("/", (req, res) => {
-  res.send("Hello World!");
+app.get('/', (req, res) => {
+  res.send('Hello World!');
 });
 
-app.post("/messages", (req, res) => {
+app.post('/messages', (req, res) => {
   const id = uuidv4();
   const message = {
     id,
