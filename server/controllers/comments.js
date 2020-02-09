@@ -1,6 +1,6 @@
 import knex from '../../config/knex';
 
-export const getAllComments = async (req, res, next) => {
+export const getAllComments = async (req, res) => {
   try {
     const comments = await knex('comments').select('*');
 
@@ -10,13 +10,35 @@ export const getAllComments = async (req, res, next) => {
   }
 };
 
-export const getCommentById = async (req, res, next) => {
+export const getCommentsByPostId = async (req, res) => {
+  try {
+    const comments = await knex('comments')
+      .where({ post_id: req.params.post_id })
+      .select('*');
+
+    return res.status(200).json({ comments });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
+export const getCommentById = async (req, res) => {
   try {
     const comment = await knex('comments')
       .where({ id: req.params.id })
       .select('*');
 
     return res.status(200).json({ comment });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
+export const createComment = async (req, res) => {
+  try {
+    const comment = await knex('comments').insert(req.body);
+
+    return res.status(201).json({ comment });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
