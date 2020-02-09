@@ -2,23 +2,42 @@
   "name": "ea-takehome-assignment",
   "version": "1.0.0",
   "description": "ea takehome assignment feb8",
-  "main": "server.js",
+  "main": "app.js",
   "author": "Roy Jang <jangroy@hotmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon --exec babel-node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "initialize": "npx knex migrate:latest && npx knex seed:run",
+    "start": "nodemon --exec babel-node app.js",
+    "test": "NODE_ENV=test jest -testTimeout=10000 --detectOpenHandles",
+    "test:watch": "yarn run test --watch",
+    "pretest": "NODE_ENV=test yarn run initialize"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   },
   "dependencies": {
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "uuid": "^3.4.0"
+    "faker": "^4.1.0",
+    "knex": "^0.20.9",
+    "sqlite3": "^4.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
     "@babel/node": "^7.8.4",
+    "@babel/plugin-transform-runtime": "^7.8.3",
     "@babel/preset-env": "^7.8.4",
+    "@babel/runtime": "^7.8.4",
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "jest": "^25.1.0",
     "nodemon": "^2.0.2",
-    "prettier": "^1.19.1"
+    "prettier": "^1.19.1",
+    "supertest": "^4.0.2"
   }
 }
