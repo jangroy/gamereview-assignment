@@ -2,17 +2,19 @@
   "name": "ea-takehome-assignment",
   "version": "1.0.0",
   "description": "ea takehome assignment feb8",
-  "main": "server.js",
+  "main": "server/app.js",
   "author": "Roy Jang <jangroy@hotmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon --exec babel-node server.js",
+    "start": "nodemon --exec babel-node server/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "uuid": "^3.4.0"
+    "faker": "^4.1.0",
+    "knex": "^0.20.9",
+    "sqlite3": "^4.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
