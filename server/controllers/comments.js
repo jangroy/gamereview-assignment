@@ -55,3 +55,27 @@ export const createComment = async (req, res) => {
     return res.status(500).json({ error: error.message });
   }
 };
+
+export const updateCommentById = async (req, res) => {
+  try {
+    const comment = await knex('comments')
+      .update(req.query)
+      .then(() => req.query);
+
+    return res.status(200).json({ comment });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
+export const deleteCommentById = async (req, res) => {
+  try {
+    await knex('comments')
+      .where('id', req.params.id)
+      .del();
+
+    return res.status(200).json({ msg: `deleted comment with id ${req.params.id}` });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
