@@ -7,7 +7,7 @@ stages:
   - name: docker-share
     if: branch = dev
   - name: deploy
-    if: branch = master
+#    if: branch = master
 
 jobs:
   include:
@@ -20,9 +20,9 @@ jobs:
         - docker push jangroy91/gamereview-api:latest
       after_script:
         - docker images
-    - stage: deploy
-      deploy:
-        provider: heroku
-        api_key: $HEROKU_API_KEY
+#    - stage: deploy
+#      deploy:
+#        provider: heroku
+#        api_key: $HEROKU_API_KEY
 # Initially I wanted to have travis trigger a git merge to master
 # and then I could manually merge PR, which would trigger a travis deploy to Heroku as a container
