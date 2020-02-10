@@ -1,0 +1,28 @@
+language: minimal
+services:
+  - docker
+stages:
+  - name: test
+    if: branch = dev
+  - name: docker-share
+    if: branch = dev
+  - name: deploy
+    if: branch = master
+
+jobs:
+  include:
+    - stage: test
+      script: make test
+    - stage: docker-share
+      script:
+        - echo "$DOCKERHUB_PWD" | docker login -u "$DOCKERHUB_USER" --password-stdin
+        - docker build -t jangroy91/gamereview-api:latest -f docker/api.Dockerfile .
+        - docker push jangroy91/gamereview-api:latest
+      after_script:
+        - docker images
+    - stage: deploy
+      deploy:
+        provider: heroku
+        api_key: $HEROKU_API_KEY
+# Initially I wanted to have travis trigger a git merge to master
+# and then I could manually merge PR, which would trigger a travis deploy to Heroku as a container

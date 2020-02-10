@@ -17,7 +17,29 @@ describe('Blog Post Routes', () => {
         author: 'post tester'
       });
     expect(res.statusCode).toEqual(201);
-    expect(res.body).toHaveProperty('post');
+    expect(res.body).toMatchObject({
+      post: {
+        title: 'testing title',
+        article: 'testing article',
+        author: 'post tester'
+      }
+    });
+  });
+  it('should update a blog post by post id', async () => {
+    const res = await request(app)
+      .put('/api/posts/:id')
+      .send({ id: 1 })
+      .query({
+        title: 'updated title'
+      });
+    expect(res.statusCode).toEqual(200);
+    expect(res.body).toMatchObject({ post: { title: 'updated title' } });
+  });
+  it('should delete a blog post by post id', async () => {
+    const res = await request(app)
+      .delete('/api/posts/:id')
+      .send({ id: 1 });
+    expect(res.statusCode).toEqual(200);
   });
 });
 
@@ -40,9 +62,28 @@ describe('Comment Routes', () => {
       .query({
         comment: 'testing comment',
         author: 'comment tester',
-        post_id: 1
+        post_id: '1'
       });
     expect(res.statusCode).toEqual(201);
-    expect(res.body).toHaveProperty('comment');
+    expect(res.body).toMatchObject({
+      comment: { comment: 'testing comment', author: 'comment tester', post_id: '1' }
+    });
+  });
+
+  it('should update a blog comment by comment id', async () => {
+    const res = await request(app)
+      .put('/api/comments/:id')
+      .send({ id: 1 })
+      .query({
+        comment: 'updated comment'
+      });
+    expect(res.statusCode).toEqual(200);
+    expect(res.body).toMatchObject({ comment: { comment: 'updated comment' } });
+  });
+  it('should delete a blog comment by comment id', async () => {
+    const res = await request(app)
+      .delete('/api/comments/:id')
+      .send({ id: 1 });
+    expect(res.statusCode).toEqual(200);
   });
 });
