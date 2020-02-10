@@ -9,6 +9,7 @@ server.use(express.urlencoded({ extended: false }));
 // server.use((req, res, next) => {
 //   console.log('params', req.params);
 //   console.log('queries', req.query);
+//   console.log('body', req.body);
 //   next();
 // });
 

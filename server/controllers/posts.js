@@ -2,7 +2,7 @@ import knex from '../../config/knex';
 
 export const getAllPosts = async (req, res) => {
   try {
-    const posts = await knex('posts').select('*');
+    const posts = await knex('posts').select();
     return res.status(200).json({ posts });
   } catch (error) {
     return res.status(500).json({ error: error.message });
@@ -12,7 +12,7 @@ export const getPostById = async (req, res) => {
   try {
     const post = await knex('posts')
       .where({ id: req.params.id })
-      .select('*');
+      .select();
     return res.status(200).json({ post });
   } catch (error) {
     return res.status(500).json({ error: error.message });
@@ -20,7 +20,24 @@ export const getPostById = async (req, res) => {
 };
 export const createPost = async (req, res) => {
   try {
-    const post = await knex('posts').insert(req.body);
+    let errorMessage = [];
+    if (!req.query.author) {
+      errorMessage.push('author');
+    }
+    if (!req.query.article) {
+      errorMessage.push('article');
+    }
+    if (!req.query.title) {
+      errorMessage.push('title');
+    }
+    if (errorMessage.length > 0) {
+      return res.status(500).json({ error: `Cannot post with empty ${errorMessage}` });
+    }
+
+    const post = await knex('posts')
+      .insert(req.query)
+      .then(() => req.query);
+
     return res.status(201).json({ post });
   } catch (error) {
     return res.status(500).json({ error: error.message });
