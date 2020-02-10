@@ -26,4 +26,3 @@ jobs:
         api_key: $HEROKU_API_KEY
 # Initially I wanted to have travis trigger a git merge to master
 # and then I could manually merge PR, which would trigger a travis deploy to Heroku as a container
-# but I am running out of time
