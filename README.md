@@ -22,9 +22,9 @@ Feel free to pull from the DockerHub repo `docker pull jangroy91/gamereview-api:
 
 ## Interacting with the backend API
 
-Server will be live at `${hostname}:3001`
+Server will be live at `localhost:3001`
 
-- You can use `curl -X (GET|POST|PUT|DELETE) $(hostname):3031/api/`
+- You can use `curl -X (GET|POST|PUT|DELETE) $(hostname):3001/api/`
 - Or make HTTP requests with [Postman](https://www.postman.com/).
 
 Endpoints:
