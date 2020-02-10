@@ -1,7 +1,25 @@
-language: node_js
+language: minimal
 services:
   - docker
+stages:
+  - name: test
+    if: branch = dev
+  - name: docker-share
+    if: branch = dev
+  - name: deploy
+    if: branch = master
 
-before_install:
-  - make test
-
+jobs:
+  include:
+    - stage: test
+      script: make test
+    - stage: docker-share
+      script:
+        - echo "$DOCKERHUB_PWD" | docker login -u $DOCKERHUB_USER --password-stdin
+        - docker build -t jangroy91/gamereview-api:latest -f docker/api.Dockerfile .
+      after_script:
+        - docker images
+    - stage: deploy
+      deploy:
+        provider: heroku
+        api_key: $HEROKU_API_KEY
