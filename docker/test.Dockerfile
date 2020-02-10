@@ -19,10 +19,9 @@ CMD ["yarn", "test"]
 # travis pipeline
 # 1. [CI] commit dev branch
 #   - travis triggers
-#       - git pull from repo
-#       - build app
-#       - test app
-#       - make docker image and push to dockerhub
+#       - git pull from dev branch, code is new code
+#       - make test, runs docker-compose up and yarn test
+#       - once succeded, docker build and docker push :latest create pull request to master, docker build and push
 #       - trigger heroku to download new image and rerun
 
 # sqlite file will be made during...

@@ -1,17 +1,4 @@
-#language: node_js
-#node_js:
-#  - 'lts/*'
-#cache:
-#  directories:
-#    - node_modules
-#branches:
-#  only:
-#    - dev
-#script:
-#  - echo 'Installing dependencies'
-#  - yarn
-#  - echo 'Running unit tests'
-#  - yarn test
+language: node_js
 services:
   - docker
 
