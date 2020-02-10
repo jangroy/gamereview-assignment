@@ -13,6 +13,7 @@ Note:
 Test with `make test`
 
 Note: 
+- This will run build and run `test.Dockerfile`. 
 - Only runs route unit tests at the moment. 
 - Basic code coverage displayed.
 
@@ -40,7 +41,9 @@ Endpoints:
 
 ## CI and CD
 
-Travis CI is integrated into this project and will trigger tests when code is pushed into `dev` branch. Once tests pass, it will build new docker image tagged `:latest` and push it to my docker hub repository.
+Travis CI is integrated into this project and will trigger tests when code is pushed into `dev` branch. 
+
+Once tests pass, it will build new docker image tagged `:latest` and push it to my docker hub repository.
 
 Automated CD is currently a work in progress.
 
