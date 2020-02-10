@@ -27,20 +27,6 @@ module.exports = {
     }
   },
 
-  staging: {
-    client: 'sqlite3',
-    useNullAsDefault: true,
-    connection: {
-      filename: 'db/stag.sqlite3'
-    },
-    seeds: {
-      directory: 'db/seeds/'
-    },
-    migrations: {
-      directory: 'db/migrations/'
-    }
-  },
-
   production: {
     client: 'sqlite3',
     useNullAsDefault: true,
