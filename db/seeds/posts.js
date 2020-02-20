@@ -1,6 +1,6 @@
 const faker = require('faker');
 
-const HOW_MANY_TO_SEED = 3;
+const HOW_MANY_TO_SEED = 45;
 let posts = [];
 
 for (let i = 0; i < HOW_MANY_TO_SEED; i++) {
