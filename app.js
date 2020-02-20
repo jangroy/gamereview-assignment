@@ -1,7 +1,7 @@
 import '@babel/polyfill';
 import 'dotenv/config';
 const app = require('./server/server');
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.SERVER_PORT || 8080;
 
 // while testing, app.listen() within the test suite
 if (process.env.NODE_ENV !== 'test') {
