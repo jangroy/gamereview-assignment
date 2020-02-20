@@ -2,7 +2,9 @@ import knex from '../../config/knex';
 
 export const getAllPosts = async (req, res) => {
   try {
-    const posts = await knex('posts').select();
+    const posts = await knex('posts')
+      .select()
+      .orderBy('id', 'desc');
     return res.status(200).json({ posts });
   } catch (error) {
     return res.status(500).json({ error: error.message });
